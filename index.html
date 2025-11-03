@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <meta charset="UTF-8">
   <title>TO-DO LIST</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="header">
+    <header>
     <h1>TO-DO LIST</h1>
     <input id="new_task" type="text" placeholder="tapez votre tache">
-    <span onclick="addtask()" class="button">Ajouter</span>
-    </div>
+    <span onclick="addtask()" class="addbutton">Ajouter</span>
+    </header>
+    <main>
     <ul id="mylist">
-        <li>tache 1</li>
-        <li>tache 2</li>
+        <li>Tache 1</li>
+        <li>Tache 2</li>
+        <li>Tache 3</li>
+        <li>Tache 4</li>
     </ul>
+    </main>
     <script src="script.js"></script>
 </body>
 

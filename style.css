@@ -1,4 +1,65 @@
 
-ul span:hover{
-    background-color: rgb(229, 77, 77);
+li{
+    border:2px solid rgb(87, 87, 87);
+    cursor:pointer;
+    padding:10px;
+    position: relative; 
+    list-style:none;        
+}
+li::before{
+    content:"\F584";
+    padding:10px;
+    font-family: "bootstrap-icons";
+}
+li:hover{
+    background-color:rgb(163, 162, 162);
+}
+li.checked{
+      
+    background-color:rgb(129, 216, 112);
+    
+}
+li.checked::before{
+    content:"\F26D";
+    padding:10px;
+    font-family: "bootstrap-icons";
+}
+*{
+    font-size:25px;
+    font-family:Delius, sans-serif;
+}
+h1{
+    font-weight: bold;
+    text-align:center;
+}
+.addbutton{
+    background-color: rgb(217, 94, 94);
+    color:white;
+    cursor:pointer;
+    padding-right:20px;
+    padding-left: 20px;
+    border:2px black solid;
+
+}
+main{
+    padding:10px;
+}
+input{
+    width: 75%;
+    border:1px solid rgb(163, 162, 162);
+    ;
+}
+header{
+    background-color:rgb(68, 144, 177);
+    text-align:center;
+    padding:15px;
+}
+.close{
+    padding:10px;
+    position: absolute;          
+    right: 0;                    
+    top: 0; 
+}              
+.close:hover{
+background-color: rgb(229, 77, 77);
 }
