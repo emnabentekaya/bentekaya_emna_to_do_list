@@ -1,12 +1,24 @@
-
 li{
-    border:2px solid rgb(87, 87, 87);
+    border:2px solid rgb(142, 142, 142);
     cursor:pointer;
     padding:10px;
     position: relative; 
     list-style:none;        
 }
-li::before{
+.container{
+    padding-bottom:70px;
+    padding-right:20px;
+    padding-left :20px;
+    padding-top:20px;
+    position: relative;
+}
+.tri{
+    float: right;
+}
+.filtre{
+    float: left;
+}
+li.unchecked::before{
     content:"\F584";
     padding:10px;
     font-family: "bootstrap-icons";
@@ -15,9 +27,7 @@ li:hover{
     background-color:rgb(163, 162, 162);
 }
 li.checked{
-      
     background-color:rgb(129, 216, 112);
-    
 }
 li.checked::before{
     content:"\F26D";
@@ -39,7 +49,6 @@ h1{
     padding-right:20px;
     padding-left: 20px;
     border:2px black solid;
-
 }
 main{
     padding:10px;
@@ -47,12 +56,11 @@ main{
 input{
     width: 75%;
     border:1px solid rgb(163, 162, 162);
-    ;
 }
 header{
     background-color:rgb(68, 144, 177);
     text-align:center;
-    padding:15px;
+    padding:25px;
 }
 .close{
     padding:10px;
@@ -61,5 +69,5 @@ header{
     top: 0; 
 }              
 .close:hover{
-background-color: rgb(229, 77, 77);
+background-color: rgb(217, 94, 94);
 }

@@ -19,11 +19,13 @@ let list = document.querySelector('ul');
 list.addEventListener('click', function(event) {
   if (event.target.tagName === 'LI') {
     event.target.classList.toggle('checked');
+    //pour que le filtre soit appliqué immediatement 
+    filterTasks(); 
   }
 }, false);
 
 //ajout d'une nouvelle tache
-function addtask() {
+function addTask() {
   let li = document.createElement("li");
   let inputValue = document.getElementById("new_task").value;
   let t = document.createTextNode(inputValue);
@@ -32,6 +34,7 @@ function addtask() {
     alert("Vous n'avez rien écris");
   } else {
     document.getElementById("mylist").appendChild(li);
+    li.classList.add("unchecked");
   }
   document.getElementById("new_task").value = "";
 
@@ -47,5 +50,37 @@ function addtask() {
       div.style.display = "none";
     }
   }
+  //pour que le filtre soit appliqué immediatement
+  filterTasks();
 }
 
+//filtrer les taches
+function filterTasks(){
+  let select = document.querySelector('select');
+  let value = select.value;
+  let items = document.querySelectorAll('li');
+  
+  for (let li of items) {
+    if (value === "all") {
+      li.style.display = "list-item";
+      //afficher les taches accomplies
+    } else if (value === "checked") {
+      if (li.classList.contains("checked")) {
+        li.style.display = "list-item";
+      } else {
+        li.style.display = "none";
+      }
+      //afficher les taches non accomplies
+    } else if (value === "unchecked") {
+      if (!li.classList.contains("checked")) {
+        li.style.display = "list-item";
+      } else {
+        li.style.display = "none";
+      }
+    }
+  }
+}
+//trier les taches 
+function sortTasks(){
+
+}
