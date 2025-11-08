@@ -10,8 +10,10 @@ for (let i = 0; i < Nodelist.length; i++) {
 let close = document.getElementsByClassName("close");
 for (let i = 0; i < close.length; i++) {
   close[i].onclick = function() {
-    let div = this.parentElement;
-    div.style.display = "none";
+    this.parentElement.remove();
+    
+    //sauvegarder la suppression
+    //saveTasks(); 
   }
 }
 //cocher une tache
@@ -19,8 +21,11 @@ let list = document.querySelector('ul');
 list.addEventListener('click', function(event) {
   if (event.target.tagName === 'LI') {
     event.target.classList.toggle('checked');
-    //pour que le filtre soit appliqué immediatement 
+    //pour que le filtre et le tri soient appliqués immediatement 
     filterTasks(); 
+    sortTasks();
+    //sauvegarder le changement
+    //saveTasks(); 
   }
 }, false);
 
@@ -50,8 +55,11 @@ function addTask() {
       div.style.display = "none";
     }
   }
-  //pour que le filtre soit appliqué immediatement
+  //pour que le filtre et le tri soient appliqués immediatement
   filterTasks();
+  sortTasks();
+  //sauvegarder l'ajout
+  //saveTasks(); 
 }
 
 //filtrer les taches
@@ -82,5 +90,29 @@ function filterTasks(){
 }
 //trier les taches 
 function sortTasks(){
-
+  let sortSelect = document.getElementById('sort');
+  let sortValue = sortSelect.value;
+  let list = document.getElementById('mylist');
+  let items = Array.from(list.getElementsByTagName('li'));
+  
+  if (sortValue === "none") {
+    return;
+  }
+  else if (sortValue === "checked-first") {
+    //si a est coché et b ne l'est pas, a vient avant b
+    items.sort((a, b) => {
+      if (a.classList.contains('checked') && !b.classList.contains('checked')) return -1;
+      if (!a.classList.contains('checked') && b.classList.contains('checked')) return 1;
+      return 0;
+    });
+  } else if (sortValue === "unchecked-first") {
+    //si a n'est pas coché et b l'est, a vient avant b
+    items.sort((a, b) => {
+      if (!a.classList.contains('checked') && b.classList.contains('checked')) return -1;
+      if (a.classList.contains('checked') && !b.classList.contains('checked')) return 1;
+      return 0;
+    });
+  }
+  list.innerHTML = "";
+  items.forEach(li => list.appendChild(li));
 }

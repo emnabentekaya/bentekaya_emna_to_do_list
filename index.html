@@ -21,7 +21,7 @@
         <span class="filtre">
             <label for="filter">filtrer les taches</label>
             <br>
-            <select onchange="filterTasks()">
+            <select id="filter"onchange="filterTasks()">
                 <option value="all">Toutes les taches</option>
                 <option value="checked">Taches accomplies</option>
                 <option value="unchecked">Taches non accomplies</option>
@@ -30,7 +30,8 @@
         <span class="tri">
             <label for="sort">trier les taches</label>
             <br>
-            <select onchange="sortTasks()">
+            <select id="sort" onchange="sortTasks()">
+                <option value="none">Non triées</option>
                 <option value="checked-first">Les Taches accomplies en premier</option>
                 <option value="unchecked-first">Les taches non accomplies en premier</option>
             </select>
