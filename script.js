@@ -1,5 +1,57 @@
+//LocalStorage
+window.onload = function() {
+    loadTasks();
+};
+
+//sauvegarder les taches dans le local storage
+function saveTasks() {
+    let items = document.querySelectorAll('#mylist li');
+    let tasks = [];
+    //création d'un tableau d'objets (texte,classe de la tache)
+    items.forEach(li => {
+        tasks.push({
+            text: li.firstChild.textContent,
+            checked: li.classList.contains('checked')
+        });
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+//charger les taches de local storage
+function loadTasks() {
+    let tasks = JSON.parse(localStorage.getItem('tasks'));
+    let list = document.getElementById('mylist');
+    list.innerHTML = "" 
+    tasks.forEach(task => {
+        let li = document.createElement('li');
+        li.textContent = task.text;
+        if(task.checked) {
+        li.classList.add('checked');
+}
+         else
+         {
+           li.classList.add('unchecked');
+}
+        //mettre une croix a la fin de la tache
+        let span = document.createElement("SPAN");
+        let txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+        list.appendChild(li);
+    });
+
+    let close = document.getElementsByClassName("close");
+    for (let i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+    this.parentElement.remove();
+}}}
+
+
+
 //supprimer une tache
 let Nodelist = document.getElementsByTagName("LI");
+//mettre une croix a la fin de chaque tache
 for (let i = 0; i < Nodelist.length; i++) {
   let span = document.createElement("SPAN");
   let txt = document.createTextNode("\u00D7");
@@ -8,29 +60,38 @@ for (let i = 0; i < Nodelist.length; i++) {
   Nodelist[i].appendChild(span);
 }
 let close = document.getElementsByClassName("close");
+//supprimer le parent de la croix (la tache)
 for (let i = 0; i < close.length; i++) {
   close[i].onclick = function() {
     this.parentElement.remove();
     
     //sauvegarder la suppression
-    //saveTasks(); 
+    saveTasks(); 
   }
 }
+
 //cocher une tache
 let list = document.querySelector('ul');
 list.addEventListener('click', function(event) {
   if (event.target.tagName === 'LI') {
-    event.target.classList.toggle('checked');
+    //pour verifier que chaque tache a une seule classe
+    if(event.target.classList.contains('checked')) {
+        event.target.classList.remove('checked');
+        event.target.classList.add('unchecked');
+    } else {
+        event.target.classList.remove('unchecked');
+        event.target.classList.add('checked');
+    }
     //pour que le filtre et le tri soient appliqués immediatement 
     filterTasks(); 
     sortTasks();
-    //sauvegarder le changement
-    //saveTasks(); 
-  }
-}, false);
+    //sauvegarder le changement 
+    saveTasks(); 
+  }}, false);
 
 //ajout d'une nouvelle tache
-function addTask() {
+function addTask(event) {
+   event.preventDefault();
   let li = document.createElement("li");
   let inputValue = document.getElementById("new_task").value;
   let t = document.createTextNode(inputValue);
@@ -48,18 +109,18 @@ function addTask() {
   span.className = "close";
   span.appendChild(txt);
   li.appendChild(span);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
+  let close = document.getElementsByClassName("close");
+  for (let i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    this.parentElement.remove();
+    
     }
   }
   //pour que le filtre et le tri soient appliqués immediatement
   filterTasks();
   sortTasks();
   //sauvegarder l'ajout
-  //saveTasks(); 
+  saveTasks(); 
 }
 
 //filtrer les taches
@@ -88,6 +149,7 @@ function filterTasks(){
     }
   }
 }
+
 //trier les taches 
 function sortTasks(){
   let sortSelect = document.getElementById('sort');
