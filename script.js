@@ -22,6 +22,7 @@ function loadTasks() {
     let tasks = JSON.parse(localStorage.getItem('tasks'));
     let list = document.getElementById('mylist');
     list.innerHTML = "" 
+    if (!tasks) return;
     tasks.forEach(task => {
         let li = document.createElement('li');
         li.textContent = task.text;
@@ -45,7 +46,9 @@ function loadTasks() {
     for (let i = 0; i < close.length; i++) {
     close[i].onclick = function() {
     this.parentElement.remove();
-}}}
+    saveTasks();
+}}
+}
 
 
 
@@ -113,14 +116,15 @@ function addTask(event) {
   for (let i = 0; i < close.length; i++) {
   close[i].onclick = function() {
     this.parentElement.remove();
+    //sauvegarder l'ajout
+    saveTasks(); 
     
     }
   }
   //pour que le filtre et le tri soient appliqués immediatement
   filterTasks();
   sortTasks();
-  //sauvegarder l'ajout
-  saveTasks(); 
+  
 }
 
 //filtrer les taches

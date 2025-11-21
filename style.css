@@ -1,46 +1,44 @@
-li{
-    border:2px solid rgb(142, 142, 142);
+li{ 
     cursor:pointer;
     padding:10px;
     position: relative; 
-    list-style:none;        
+    list-style:none;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);      
 }
-.container{
-    padding-bottom:70px;
-    padding-right:20px;
-    padding-left :20px;
-    padding-top:20px;
-    position: relative;
-}
-.tri{
-    float: right;
-}
-.filtre{
-    float: left;
+ul {
+    display: flex;
+    flex-direction:column; 
+    gap: 15px; 
+    padding: 30px; 
 }
 li.unchecked::before{
-    content:"\F584";
+    content:"▢";
     padding:10px;
-    font-family: "bootstrap-icons";
+    height:30px;
 }
 li:hover{
     background-color:rgb(163, 162, 162);
 }
 li.checked{
-    background-color:rgb(129, 216, 112);
+    background-color:rgb(129, 216, 112);;
+    height:30px;
+    
 }
 li.checked::before{
-    content:"\F26D";
+    content:"✔";
     padding:10px;
-    font-family: "bootstrap-icons";
 }
 *{
     font-size:25px;
-    font-family:Delius, sans-serif;
+    font-family:"Segoe UI", Arial, sans-serif;
 }
 h1{
     font-weight: bold;
     text-align:center;
+    font-size:40px;
 }
 .addbutton{
     background-color: rgb(217, 94, 94);
@@ -49,35 +47,109 @@ h1{
     padding-right:20px;
     padding-left: 20px;
     border:2px black solid;
+    border-radius:15px;
+    height: 30px;
 }
 main{
-    padding:10px;
+    padding:10px;  
 }
 input{
     width: 75%;
     border:1px solid rgb(163, 162, 162);
+    border-radius:15px;
+    height:35px;
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    position: relative;
+    padding:10px;
+}
+select {
+    appearance: none;
+    border-radius: 12px;
+    padding: 8px 44px 8px 12px; 
+    font-size: 20px;
+    height: 40px;
+}
+select::after{
+    content: "▾";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+.filtre select {
+    width: 220px;
+    
+}
+.tri select {
+    width: 270px;
+    
 }
 header{
     background-color:rgb(68, 144, 177);
     text-align:center;
-    padding:25px;
+    padding: 30px 20px;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 .close{
     padding:10px;
     position: absolute;          
     right: 0;                    
     top: 0; 
+    border-radius:15px;
 }              
 .close:hover{
 background-color: rgb(217, 94, 94);
 }
+footer{
+    background-color: rgb(68, 144, 177);
+    text-align:center;
+    bottom: 0;
+}
+
+
+
+
+/*redimensionnement */
 @media (max-width: 768px){
-    input{
-        width:40%;
+    header{
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
     }
     .input_container {
-    display: flex;
-    flex-direction: column;
-    
+        display: flex;
+        flex-direction: column; 
+        align-items: center;    
+        gap: 10px;
+        width: 100%;             
+        padding: 20px 0;
     }
+    input {
+
+        width: 90%;             
+    }
+    .addbutton {
+        width: auto;             
+        align-self: center;      
+        padding: 5px 25px;
+    }
+}
+@media (max-width: 570px){
+    .container{  
+    flex-direction: column;
+}
+    .filtre select {
+    width: 200px;
+    
+}
+.tri select {
+    width: 200px;
+    
+}
 }
