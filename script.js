@@ -24,52 +24,41 @@ function loadTasks() {
     list.innerHTML = "" 
     if (!tasks) return;
     tasks.forEach(task => {
-        let li = document.createElement('li');
-        li.textContent = task.text;
-        if(task.checked) {
+      let li = document.createElement('li');
+      li.appendChild(document.createTextNode(task.text));
+      if (task.checked) {
         li.classList.add('checked');
-}
-         else
-         {
-           li.classList.add('unchecked');
-}
-        //mettre une croix a la fin de la tache
-        let span = document.createElement("SPAN");
-        let txt = document.createTextNode("\u00D7");
-        span.className = "close";
-        span.appendChild(txt);
-        li.appendChild(span);
-        list.appendChild(li);
+      } else {
+        li.classList.add('unchecked');
+      }
+      // mettre une croix a la fin de la tache
+      let span = document.createElement("span");
+      span.className = "close";
+      span.appendChild(document.createTextNode("\u00D7"));
+      li.appendChild(span);
+
+      // ajout du bouton modifier
+      let editButton = document.createElement("button");
+      editButton.className = "edit";
+      editButton.textContent = "Modifier ✎";
+      li.appendChild(editButton);
+      list.appendChild(li);
     });
-
-    let close = document.getElementsByClassName("close");
-    for (let i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-    this.parentElement.remove();
-    saveTasks();
-}}
-}
-
-
-
-//supprimer une tache
-let Nodelist = document.getElementsByTagName("LI");
-//mettre une croix a la fin de chaque tache
-for (let i = 0; i < Nodelist.length; i++) {
-  let span = document.createElement("SPAN");
-  let txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  Nodelist[i].appendChild(span);
-}
-let close = document.getElementsByClassName("close");
-//supprimer le parent de la croix (la tache)
-for (let i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    this.parentElement.remove();
     
-    //sauvegarder la suppression
-    saveTasks(); 
+    editTask_event();
+    close_event();
+}
+
+// fonction pour supprimer une tache
+function close_event(){
+  let close = document.getElementsByClassName("close");
+  // supprimer le parent de la croix (la tache)
+  for (let i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      this.parentElement.remove();
+      // sauvegarder la suppression
+      saveTasks();
+    }
   }
 }
 
@@ -99,7 +88,7 @@ function addTask(event) {
   let inputValue = document.getElementById("new_task").value;
   let t = document.createTextNode(inputValue);
   li.appendChild(t);
-  if (inputValue === '') {
+  if (inputValue.trim() === '') {
     alert("Vous n'avez rien écris");
   } else {
     document.getElementById("mylist").appendChild(li);
@@ -112,24 +101,46 @@ function addTask(event) {
   span.className = "close";
   span.appendChild(txt);
   li.appendChild(span);
-  let close = document.getElementsByClassName("close");
-  for (let i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    this.parentElement.remove();
-    //sauvegarder l'ajout
-    saveTasks(); 
-    
-    }
-  }
+  close_event();
+  editTask_event();
+  
+
+  //ajout du bouton modifier
+  let editButton=document.createElement("button");
+  editButton.className="edit";
+  editButton.textContent = "Modifier ✎";
+  li.appendChild(editButton);
+  editTask_event();
+  //sauvegarder l'ajout
+  saveTasks(); 
   //pour que le filtre et le tri soient appliqués immediatement
   filterTasks();
   sortTasks();
-  
 }
+  
+
+function editTask(li) {
+    let oldText=li.firstChild.textContent;
+    let newText=prompt("Modifier la tache:",oldText);
+    //verifier si ce n'est pas vide
+    if(newText.trim()!==""){
+      li.firstChild.textContent=newText.trim();
+      saveTasks();
+    }
+}
+//ajout des evenements aux boutons modifier
+function editTask_event() {
+let editButtons=document.getElementsByClassName("edit");
+for(let i=0;i<editButtons.length;i++){
+  editButtons[i].onclick=function(){
+    editTask(this.parentElement);
+  }
+}}
 
 //filtrer les taches
 function filterTasks(){
-  let select = document.querySelector('select');
+  let select = document.getElementById('filter');
+  if (!select) return;
   let value = select.value;
   let items = document.querySelectorAll('li');
   

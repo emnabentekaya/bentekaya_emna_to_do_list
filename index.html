@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Patrick+Hand&display=swap" rel="stylesheet">
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
   <title>TO-DO LIST</title>
   <link rel="stylesheet" href="style.css">
@@ -16,7 +9,10 @@
 </head>
 <body>
     <header>
+    <span class="title">
+    <figure><img src="logo.png" alt="Logo"></figure>
     <h1>TO-DO LIST</h1>
+    </span>
     <div class="input_container">
     <input id="new_task" type="text" placeholder="tapez votre tache">
     <span onclick="addTask(event)" class="addbutton">Ajouter</span>
