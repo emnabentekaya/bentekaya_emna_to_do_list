@@ -193,3 +193,4 @@ function sortTasks(){
   list.innerHTML = "";
   items.forEach(li => list.appendChild(li));
 }
+document.getElementById("year").textContent = new Date().getFullYear();
