@@ -1,41 +1,6 @@
-li{ 
-    cursor:pointer;
-    padding:10px;
-    list-style:none;
-    position:relative;
-    display: flex;
-    align-items: center;
-    border-radius: 15px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.3);  
-    height:35px;
-
-}
-ul {
-    display: flex;
-    flex-direction:column; 
-    gap: 15px; 
-    padding: 30px; 
-}
-li.unchecked::before{
-    content:"▢";
-    padding-right:10px;
-}
-li:hover{
-    background-color:rgb(197, 197, 197);
-}
-li.unchecked{
-    transition: background-color 2s ease, color 2s ease;
-    
-}
-li.checked{
-    background-color:rgb(129, 216, 112);
-    color:rgb(109, 109, 109);
-    transition: background-color 2s ease, color 2s ease;
-    
-}
-li.checked::before{
-    content:"✔";
-    padding-right:10px; 
+figure img{
+    width:60px;
+    height:60px;
 }
 *{
     font-size:25px;
@@ -45,6 +10,13 @@ h1{
     font-weight: bold;
     text-align:center;
     font-size:40px;
+}
+header{
+    background-color:rgb(68, 144, 177);
+    text-align:center;
+    padding: 30px 20px;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 .addbutton{
     background-color: rgb(217, 94, 94);
@@ -83,12 +55,7 @@ select {
     font-size: 20px;
     height: 40px;
 }
-.tri select::after{
-    content: "▾";
-    position: absolute;
-    right: 15px;
-    top: 50%;
-}
+
 .filtre select {
     width: 230px;
     
@@ -97,12 +64,47 @@ select {
     width: 270px;
     
 }
-header{
-    background-color:rgb(68, 144, 177);
-    text-align:center;
-    padding: 30px 20px;
-    border-radius: 25px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+ul {
+    display: flex;
+    flex-direction:column; 
+    gap: 15px; 
+    padding: 30px; 
+}
+li{ 
+    cursor:pointer;
+    padding:10px;
+    list-style:none;
+    display: flex;
+    position:relative;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);  
+    height:35px;
+}
+
+li.checked .task-text{
+    text-decoration: line-through;
+    color:rgb(109, 109, 109);
+    transition: color 1s ease, text-decoration 1s ease; 
+}
+li:hover{
+    background-color:rgb(197, 197, 197);
+}
+li.unchecked::before{
+    content:"▢";
+    padding-right:10px;
+}
+li.unchecked{
+    transition: background-color 1s ease, color 1s ease;   
+}
+li.checked{
+    background-color:rgb(129, 216, 112);
+    color:rgb(109, 109, 109);
+    transition: background-color 1s ease, color 1s ease;    
+}
+li.checked::before{
+    content:"✔";
+    padding-right:10px; 
 }
 .close{
     padding:10px;
@@ -111,27 +113,25 @@ header{
     border-radius:15px;
     right: 0;                    
     top: 0; 
-} 
-            
+}           
 .close:hover{
 background-color: rgb(217, 94, 94);
 }
 li .edit{
     color:rgb(217, 94, 94); 
     border:none;
+    border-radius:10px;
     position: absolute;
     right:50px;
     top: 5px;
-    bottom:5px;
-    border-radius:10px; 
+    bottom:5px; 
     background-color: white; 
-    cursor:pointer;
-    
-    
+    cursor:pointer; 
+    transition: background-color 1s ease, color 1s ease; 
 }
 li.checked .edit {
     background-color:rgb(129, 216, 112);
-
+    transition: background-color 1s ease, color 1s ease;
 }
 li .edit:hover{
     color: black;
@@ -139,21 +139,11 @@ li .edit:hover{
     transform: scale(1.1);
     transition: transform 1s ease;
 }
-footer{
-    background-color: rgb(68, 144, 177);
-    text-align:center;
-    border-radius: 15px;;
-    color: white;
-    
-    
-}
-figure img{
-    width:60px;
-    height:60px;
-}
-
 /*redimensionnement */
 @media (max-width: 768px){
+    *{
+        font-size:20px;
+    }
     header{
         display: flex;
         flex-direction: column;
@@ -179,6 +169,10 @@ figure img{
     
 }
 @media (max-width: 570px){
+    
+    *{
+        font-size:15px;
+    }
     .container{  
     flex-direction: column;
 }
@@ -193,3 +187,4 @@ figure img{
 li .edit{
     font-size:small;}
 }
+

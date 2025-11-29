@@ -1,4 +1,5 @@
 //LocalStorage
+//pour executer loadTasks() après le chargement de la page
 window.onload = function() {
     loadTasks();
 };
@@ -23,28 +24,34 @@ function loadTasks() {
     let list = document.getElementById('mylist');
     list.innerHTML = "" 
     if (!tasks) return;
+    //parcourir le tableau tasks créé dans saveTasks()
     tasks.forEach(task => {
       let li = document.createElement('li');
-      li.appendChild(document.createTextNode(task.text));
+      let taskText = document.createElement('span');
+      taskText.className = 'task-text';
+      taskText.textContent = task.text;
+      li.appendChild(taskText);
       if (task.checked) {
         li.classList.add('checked');
       } else {
         li.classList.add('unchecked');
       }
-      // mettre une croix a la fin de la tache
-      let span = document.createElement("span");
-      span.className = "close";
-      span.appendChild(document.createTextNode("\u00D7"));
-      li.appendChild(span);
-
       // ajout du bouton modifier
       let editButton = document.createElement("button");
       editButton.className = "edit";
       editButton.textContent = "Modifier ✎";
       li.appendChild(editButton);
       list.appendChild(li);
+
+      // mettre une croix a la fin de la tache
+      let span = document.createElement("span");
+      span.className = "close";
+      span.appendChild(document.createTextNode("\u00D7"));
+      li.appendChild(span);
+
+      
     });
-    
+    //ajouter des evenements aux boutons modifier et croix
     editTask_event();
     close_event();
 }
@@ -53,6 +60,7 @@ function loadTasks() {
 function close_event(){
   let close = document.getElementsByClassName("close");
   // supprimer le parent de la croix (la tache)
+  //ajouter cet evenement a chaque croix
   for (let i = 0; i < close.length; i++) {
     close[i].onclick = function() {
       this.parentElement.remove();
@@ -61,7 +69,6 @@ function close_event(){
     }
   }
 }
-
 //cocher une tache
 let list = document.querySelector('ul');
 list.addEventListener('click', function(event) {
@@ -81,29 +88,27 @@ list.addEventListener('click', function(event) {
     saveTasks(); 
   }}, false);
 
+
 //ajout d'une nouvelle tache
 function addTask(event) {
+  //pour ne pas recharger la page
    event.preventDefault();
-  let li = document.createElement("li");
   let inputValue = document.getElementById("new_task").value;
-  let t = document.createTextNode(inputValue);
-  li.appendChild(t);
   if (inputValue.trim() === '') {
     alert("Vous n'avez rien écris");
-  } else {
-    document.getElementById("mylist").appendChild(li);
-    li.classList.add("unchecked");
-  }
-  document.getElementById("new_task").value = "";
+    return;}
+  else {
+  //création d'un nouvel élément de la liste
+  let li = document.createElement("li");
+  let taskText = document.createElement("span");
+  taskText.className = "task-text";
+  taskText.textContent = inputValue.trim();
+  li.appendChild(taskText);
+  document.getElementById("mylist").appendChild(li);
+  li.classList.add("unchecked");
 
-  let span = document.createElement("SPAN");
-  let txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-  close_event();
-  editTask_event();
-  
+  //vider la barre de input
+  document.getElementById("new_task").value = "";
 
   //ajout du bouton modifier
   let editButton=document.createElement("button");
@@ -111,11 +116,21 @@ function addTask(event) {
   editButton.textContent = "Modifier ✎";
   li.appendChild(editButton);
   editTask_event();
+
+  //ajout une croix à la fin de la tache
+  let span = document.createElement("SPAN");
+  let txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+  close_event();
+
   //sauvegarder l'ajout
   saveTasks(); 
   //pour que le filtre et le tri soient appliqués immediatement
   filterTasks();
   sortTasks();
+  }
 }
   
 
@@ -128,11 +143,12 @@ function editTask(li) {
       saveTasks();
     }
 }
-//ajout des evenements aux boutons modifier
+//ajout des evenements a chaque bouton modifier de la liste
 function editTask_event() {
 let editButtons=document.getElementsByClassName("edit");
 for(let i=0;i<editButtons.length;i++){
   editButtons[i].onclick=function(){
+    //appliquer editTask au parent du bouton (la tache)
     editTask(this.parentElement);
   }
 }}
@@ -193,4 +209,3 @@ function sortTasks(){
   list.innerHTML = "";
   items.forEach(li => list.appendChild(li));
 }
-document.getElementById("year").textContent = new Date().getFullYear();
