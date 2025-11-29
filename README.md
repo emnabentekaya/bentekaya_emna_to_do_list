@@ -36,15 +36,15 @@ https://emnabentekaya.github.io/bentekaya_emna_to_do_list/
 - ajouter plusieurs élements dans une seule balise (li) avec le DOM
 ---
 ## Difficultés rencontrées:
--1.les bugs lors du bascule entre les classes de taches (checked et unchecked)
--2.trouver une structure pour sauvegarder les taches dedans
--3.ajuster le CSS pour avoir une interface intuitive
--4.faire le tri des taches selon un critère special (pas alphabetique ou numérique mais selon le statut de la tache)
--5.adapter le JS pour appliquer des styles sur le le CSS (création de classes en manipulant le DOM)
+- 1.les bugs lors du bascule entre les classes de taches (checked et unchecked)
+- 2.trouver une structure pour sauvegarder les taches dedans
+- 3.ajuster le CSS pour avoir une interface intuitive
+- 4.faire le tri des taches selon un critère special (pas alphabetique ou numérique mais selon le statut de la tache)
+- 5.adapter le JS pour appliquer des styles sur le le CSS (création de classes en manipulant le DOM)
 ---
 ## Solutions apportées
--1.faire le basculement manuellement pour limiter les bugs
--2.sauvegarder les taches dans un objet
--3.faire des démos avec d'autres utilisateurs
--4.trouver la syntaxe de la methode .sort() pour le tri selon un critère special
+- 1.faire le basculement manuellement pour limiter les bugs
+- 2.sauvegarder les taches dans un objet
+- 3.faire des démos avec d'autres utilisateurs
+- 4.trouver la syntaxe de la methode .sort() pour le tri selon un critère special
 
